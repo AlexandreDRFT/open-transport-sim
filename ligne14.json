@@ -1,0 +1,1474 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.56.7 b85c4387",
+  "osm3s": {
+    "timestamp_osm_base": "2020-09-08T13:51:02Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 264491193,
+      "lat": 48.8270333,
+      "lon": 2.3664158,
+      "tags": {
+        "name": "Olympiades",
+        "network": "RATP",
+        "public_transport": "stop_position",
+        "railway": "stop",
+        "subway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3146958100,
+      "lat": 48.8533239,
+      "lon": 2.3584225
+    },
+    {
+      "type": "node",
+      "id": 4318493053,
+      "lat": 48.8666966,
+      "lon": 2.3328989
+    },
+    {
+      "type": "node",
+      "id": 3701328336,
+      "lat": 48.8721397,
+      "lon": 2.3234168
+    },
+    {
+      "type": "node",
+      "id": 3701328927,
+      "lat": 48.8711973,
+      "lon": 2.324518
+    },
+    {
+      "type": "node",
+      "id": 3701329126,
+      "lat": 48.8716478,
+      "lon": 2.3238863
+    },
+    {
+      "type": "node",
+      "id": 4318493059,
+      "lat": 48.8708682,
+      "lon": 2.3251899
+    },
+    {
+      "type": "node",
+      "id": 4318493063,
+      "lat": 48.8726756,
+      "lon": 2.3231082
+    },
+    {
+      "type": "node",
+      "id": 4318493064,
+      "lat": 48.8733079,
+      "lon": 2.3229591
+    },
+    {
+      "type": "node",
+      "id": 6354958626,
+      "lat": 48.8706817,
+      "lon": 2.3258426
+    },
+    {
+      "type": "node",
+      "id": 6354958627,
+      "lat": 48.8707354,
+      "lon": 2.3258835
+    },
+    {
+      "type": "node",
+      "id": 3146958066,
+      "lat": 48.8704082,
+      "lon": 2.3265653,
+      "tags": {
+        "name": "Madeleine",
+        "public_transport": "stop_position",
+        "subway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3701328331,
+      "lat": 48.8683966,
+      "lon": 2.3301241
+    },
+    {
+      "type": "node",
+      "id": 3701328333,
+      "lat": 48.8694164,
+      "lon": 2.3286449
+    },
+    {
+      "type": "node",
+      "id": 3701328835,
+      "lat": 48.8671809,
+      "lon": 2.3321103
+    },
+    {
+      "type": "node",
+      "id": 4318493054,
+      "lat": 48.8678982,
+      "lon": 2.3309409
+    },
+    {
+      "type": "node",
+      "id": 4318493055,
+      "lat": 48.8699015,
+      "lon": 2.3279462
+    },
+    {
+      "type": "node",
+      "id": 4318493056,
+      "lat": 48.8700382,
+      "lon": 2.327684
+    },
+    {
+      "type": "node",
+      "id": 4318493057,
+      "lat": 48.8701218,
+      "lon": 2.3274274
+    },
+    {
+      "type": "node",
+      "id": 6354958625,
+      "lat": 48.870185,
+      "lon": 2.3273491
+    },
+    {
+      "type": "node",
+      "id": 6354958628,
+      "lat": 48.8702387,
+      "lon": 2.32739
+    },
+    {
+      "type": "node",
+      "id": 243510338,
+      "lat": 48.8756126,
+      "lon": 2.3241246,
+      "tags": {
+        "STIF:zone": "1",
+        "addr:city": "Paris",
+        "addr:postcode": "75009",
+        "addr:street": "Cour de Rome",
+        "level": "-4",
+        "name": "Saint-Lazare",
+        "name:ru": "Сен-Лазар",
+        "network": "Métro de Paris;RATP",
+        "operator": "RATP",
+        "public_transport": "stop_position",
+        "railway": "stop",
+        "start_date": "2003-12-16",
+        "station": "subway",
+        "subway": "yes",
+        "type:RATP": "metro",
+        "wheelchair": "yes",
+        "wikidata": "Q1519529",
+        "wikipedia": "fr:Saint-Lazare (métro de Paris)"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3701329131,
+      "lat": 48.8748887,
+      "lon": 2.3234826
+    },
+    {
+      "type": "node",
+      "id": 4318493066,
+      "lat": 48.8743894,
+      "lon": 2.3231843
+    },
+    {
+      "type": "node",
+      "id": 4952500435,
+      "lat": 48.8752425,
+      "lon": 2.3239269
+    },
+    {
+      "type": "node",
+      "id": 4952500436,
+      "lat": 48.8738897,
+      "lon": 2.322993
+    },
+    {
+      "type": "node",
+      "id": 6372537884,
+      "lat": 48.8781899,
+      "lon": 2.3263711
+    },
+    {
+      "type": "node",
+      "id": 6372538106,
+      "lat": 48.8752704,
+      "lon": 2.3238539
+    },
+    {
+      "type": "node",
+      "id": 6372538107,
+      "lat": 48.8759385,
+      "lon": 2.3244446
+    },
+    {
+      "type": "node",
+      "id": 6372538108,
+      "lat": 48.875911,
+      "lon": 2.3245175
+    },
+    {
+      "type": "node",
+      "id": 6372538110,
+      "lat": 48.8758797,
+      "lon": 2.3243926,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538111,
+      "lat": 48.8757643,
+      "lon": 2.3242905,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538112,
+      "lat": 48.8756599,
+      "lon": 2.3241983,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538113,
+      "lat": 48.8753285,
+      "lon": 2.3239053,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538114,
+      "lat": 48.8754447,
+      "lon": 2.324008,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538115,
+      "lat": 48.8755523,
+      "lon": 2.3241032,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538116,
+      "lat": 48.8752936,
+      "lon": 2.3238745,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538117,
+      "lat": 48.8753636,
+      "lon": 2.3239363,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538118,
+      "lat": 48.875409,
+      "lon": 2.3239764,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538119,
+      "lat": 48.8754807,
+      "lon": 2.3240398,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538120,
+      "lat": 48.8755165,
+      "lon": 2.3240715,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538121,
+      "lat": 48.8755889,
+      "lon": 2.3241355,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538122,
+      "lat": 48.8756224,
+      "lon": 2.3241651,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538123,
+      "lat": 48.8756955,
+      "lon": 2.3242298,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538124,
+      "lat": 48.8757276,
+      "lon": 2.3242581,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538125,
+      "lat": 48.8757999,
+      "lon": 2.324322,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538126,
+      "lat": 48.8758441,
+      "lon": 2.3243611,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6372538127,
+      "lat": 48.8759149,
+      "lon": 2.3244237,
+      "tags": {
+        "level": "-4",
+        "location": "underground",
+        "platform_protection": "door",
+        "public_transport": "yes",
+        "start_date": "2003-12-16",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3146958108,
+      "lat": 48.8601331,
+      "lon": 2.3459579
+    },
+    {
+      "type": "node",
+      "id": 3146958067,
+      "lat": 48.8656865,
+      "lon": 2.3345203,
+      "tags": {
+        "STIF:zone": "1",
+        "name": "Pyramides",
+        "public_transport": "stop_position",
+        "subway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3146958113,
+      "lat": 48.8651126,
+      "lon": 2.3352881
+    },
+    {
+      "type": "node",
+      "id": 3146958114,
+      "lat": 48.8660782,
+      "lon": 2.3339114
+    },
+    {
+      "type": "node",
+      "id": 3701327933,
+      "lat": 48.8643504,
+      "lon": 2.3363771
+    },
+    {
+      "type": "node",
+      "id": 3701328427,
+      "lat": 48.8635775,
+      "lon": 2.3379917
+    },
+    {
+      "type": "node",
+      "id": 3701328827,
+      "lat": 48.8632387,
+      "lon": 2.3389399
+    },
+    {
+      "type": "node",
+      "id": 4318493049,
+      "lat": 48.8641157,
+      "lon": 2.3367512
+    },
+    {
+      "type": "node",
+      "id": 4318493050,
+      "lat": 48.8646618,
+      "lon": 2.3358956
+    },
+    {
+      "type": "node",
+      "id": 4318493051,
+      "lat": 48.8658612,
+      "lon": 2.3342668
+    },
+    {
+      "type": "node",
+      "id": 4318493052,
+      "lat": 48.866417,
+      "lon": 2.3333602
+    },
+    {
+      "type": "node",
+      "id": 3146958109,
+      "lat": 48.8615651,
+      "lon": 2.3438765
+    },
+    {
+      "type": "node",
+      "id": 3146958110,
+      "lat": 48.8619471,
+      "lon": 2.3430142
+    },
+    {
+      "type": "node",
+      "id": 3146958111,
+      "lat": 48.8622691,
+      "lon": 2.3420647
+    },
+    {
+      "type": "node",
+      "id": 3146958112,
+      "lat": 48.8629202,
+      "lon": 2.339876
+    },
+    {
+      "type": "node",
+      "id": 3380233366,
+      "lat": 48.8608116,
+      "lon": 2.3451358
+    },
+    {
+      "type": "node",
+      "id": 3701328134,
+      "lat": 48.8617777,
+      "lon": 2.3434326
+    },
+    {
+      "type": "node",
+      "id": 4318493045,
+      "lat": 48.8605222,
+      "lon": 2.3455153
+    },
+    {
+      "type": "node",
+      "id": 4318493046,
+      "lat": 48.861183,
+      "lon": 2.3445699
+    },
+    {
+      "type": "node",
+      "id": 4318493047,
+      "lat": 48.8621447,
+      "lon": 2.3424697
+    },
+    {
+      "type": "node",
+      "id": 4318493048,
+      "lat": 48.8624562,
+      "lon": 2.3414384
+    },
+    {
+      "type": "node",
+      "id": 3146958063,
+      "lat": 48.8597749,
+      "lon": 2.3463026,
+      "tags": {
+        "name": "Châtelet",
+        "public_transport": "stop_position",
+        "subway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3146958101,
+      "lat": 48.8557841,
+      "lon": 2.3519584
+    },
+    {
+      "type": "node",
+      "id": 3146958104,
+      "lat": 48.8560241,
+      "lon": 2.3513468
+    },
+    {
+      "type": "node",
+      "id": 3146958105,
+      "lat": 48.8568809,
+      "lon": 2.3490639
+    },
+    {
+      "type": "node",
+      "id": 3146958106,
+      "lat": 48.858106,
+      "lon": 2.347588
+    },
+    {
+      "type": "node",
+      "id": 3380233321,
+      "lat": 48.8565775,
+      "lon": 2.3498504
+    },
+    {
+      "type": "node",
+      "id": 3380233327,
+      "lat": 48.8574495,
+      "lon": 2.3482309
+    },
+    {
+      "type": "node",
+      "id": 4318463812,
+      "lat": 48.8571668,
+      "lon": 2.3485861
+    },
+    {
+      "type": "node",
+      "id": 4318493041,
+      "lat": 48.857731,
+      "lon": 2.3479193
+    },
+    {
+      "type": "node",
+      "id": 4318493042,
+      "lat": 48.8584765,
+      "lon": 2.3473399
+    },
+    {
+      "type": "node",
+      "id": 4318493043,
+      "lat": 48.8589133,
+      "lon": 2.3470516
+    },
+    {
+      "type": "node",
+      "id": 4318493044,
+      "lat": 48.8593404,
+      "lon": 2.3467284
+    },
+    {
+      "type": "node",
+      "id": 3701327932,
+      "lat": 48.855477,
+      "lon": 2.352747
+    },
+    {
+      "type": "node",
+      "id": 4318463809,
+      "lat": 48.8543008,
+      "lon": 2.3557443
+    },
+    {
+      "type": "node",
+      "id": 314951453,
+      "lat": 48.8277047,
+      "lon": 2.3712471
+    },
+    {
+      "type": "node",
+      "id": 4318493018,
+      "lat": 48.8276332,
+      "lon": 2.370936
+    },
+    {
+      "type": "node",
+      "id": 4318493019,
+      "lat": 48.8277771,
+      "lon": 2.3714764
+    },
+    {
+      "type": "node",
+      "id": 4318493020,
+      "lat": 48.8278671,
+      "lon": 2.3717165
+    },
+    {
+      "type": "node",
+      "id": 3146958062,
+      "lat": 48.8299286,
+      "lon": 2.3767172,
+      "tags": {
+        "layer": "-2",
+        "level": "-3",
+        "name": "Bibliothèque François Mitterrand",
+        "public_transport": "stop_position",
+        "subway": "yes",
+        "type:RATP": "metro",
+        "wikidata": "Q571159"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3257481531,
+      "lat": 48.830583,
+      "lon": 2.3783519
+    },
+    {
+      "type": "node",
+      "id": 3778069469,
+      "lat": 48.8295705,
+      "lon": 2.3758482
+    },
+    {
+      "type": "node",
+      "id": 3778069470,
+      "lat": 48.8302362,
+      "lon": 2.3774856
+    },
+    {
+      "type": "node",
+      "id": 4318493021,
+      "lat": 48.828253,
+      "lon": 2.3724608
+    },
+    {
+      "type": "node",
+      "id": 3257481532,
+      "lat": 48.8315602,
+      "lon": 2.3823803
+    },
+    {
+      "type": "node",
+      "id": 3294731908,
+      "lat": 48.8324252,
+      "lon": 2.3846949
+    },
+    {
+      "type": "node",
+      "id": 3294731909,
+      "lat": 48.8320718,
+      "lon": 2.383997
+    },
+    {
+      "type": "node",
+      "id": 3294731916,
+      "lat": 48.8317895,
+      "lon": 2.3831555
+    },
+    {
+      "type": "node",
+      "id": 3294731917,
+      "lat": 48.8310658,
+      "lon": 2.379549
+    },
+    {
+      "type": "node",
+      "id": 4318493022,
+      "lat": 48.8313769,
+      "lon": 2.3816097
+    },
+    {
+      "type": "node",
+      "id": 4318493023,
+      "lat": 48.832217,
+      "lon": 2.3843391
+    },
+    {
+      "type": "node",
+      "id": 4318493024,
+      "lat": 48.8328404,
+      "lon": 2.3852536
+    },
+    {
+      "type": "node",
+      "id": 5458808304,
+      "lat": 48.8311595,
+      "lon": 2.3801699
+    },
+    {
+      "type": "node",
+      "id": 3146958092,
+      "lat": 48.8405799,
+      "lon": 2.3786875
+    },
+    {
+      "type": "node",
+      "id": 3146958061,
+      "lat": 48.8399806,
+      "lon": 2.3795807,
+      "tags": {
+        "name": "Bercy",
+        "public_transport": "stop_position",
+        "subway": "yes",
+        "wikidata": "Q818853"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3294731904,
+      "lat": 48.8370482,
+      "lon": 2.3852911
+    },
+    {
+      "type": "node",
+      "id": 3294731906,
+      "lat": 48.8382731,
+      "lon": 2.3818397
+    },
+    {
+      "type": "node",
+      "id": 3294731907,
+      "lat": 48.8386592,
+      "lon": 2.3812743
+    },
+    {
+      "type": "node",
+      "id": 3294731910,
+      "lat": 48.8380423,
+      "lon": 2.3823782
+    },
+    {
+      "type": "node",
+      "id": 3294731911,
+      "lat": 48.8378568,
+      "lon": 2.382953
+    },
+    {
+      "type": "node",
+      "id": 3294731912,
+      "lat": 48.8372082,
+      "lon": 2.3848498
+    },
+    {
+      "type": "node",
+      "id": 3294731914,
+      "lat": 48.8376415,
+      "lon": 2.3836074
+    },
+    {
+      "type": "node",
+      "id": 3294731915,
+      "lat": 48.8375149,
+      "lon": 2.3839864
+    },
+    {
+      "type": "node",
+      "id": 4318493035,
+      "lat": 48.8395493,
+      "lon": 2.3801164
+    },
+    {
+      "type": "node",
+      "id": 4318493036,
+      "lat": 48.8402939,
+      "lon": 2.3791368
+    },
+    {
+      "type": "node",
+      "id": 3146958095,
+      "lat": 48.8443533,
+      "lon": 2.3722435
+    },
+    {
+      "type": "node",
+      "id": 4318463485,
+      "lat": 48.8452941,
+      "lon": 2.3706419
+    },
+    {
+      "type": "node",
+      "id": 4318463790,
+      "lat": 48.8459596,
+      "lon": 2.3696293
+    },
+    {
+      "type": "node",
+      "id": 4318463799,
+      "lat": 48.8470874,
+      "lon": 2.3675112
+    },
+    {
+      "type": "node",
+      "id": 4318493040,
+      "lat": 48.8446482,
+      "lon": 2.3717438
+    },
+    {
+      "type": "node",
+      "id": 3146958097,
+      "lat": 48.8481817,
+      "lon": 2.3658106
+    },
+    {
+      "type": "node",
+      "id": 3146958098,
+      "lat": 48.8488171,
+      "lon": 2.3649792
+    },
+    {
+      "type": "node",
+      "id": 3146958099,
+      "lat": 48.8497683,
+      "lon": 2.3641573
+    },
+    {
+      "type": "node",
+      "id": 4318463804,
+      "lat": 48.8523118,
+      "lon": 2.3609443
+    },
+    {
+      "type": "node",
+      "id": 4318463806,
+      "lat": 48.8525325,
+      "lon": 2.3605083
+    },
+    {
+      "type": "node",
+      "id": 4318463807,
+      "lat": 48.8527265,
+      "lon": 2.3600439
+    },
+    {
+      "type": "node",
+      "id": 4318463808,
+      "lat": 48.8529312,
+      "lon": 2.3594873
+    },
+    {
+      "type": "node",
+      "id": 3146958096,
+      "lat": 48.8475604,
+      "lon": 2.3666099
+    },
+    {
+      "type": "node",
+      "id": 1656938775,
+      "lat": 48.8434008,
+      "lon": 2.3739596,
+      "tags": {
+        "layer": "-3",
+        "level": "-2",
+        "level:ref": "Espace de correspondance RER & Métro",
+        "name": "Gare de Lyon",
+        "public_transport": "stop_position",
+        "subway": "yes",
+        "type:RATP": "metro",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3146958093,
+      "lat": 48.8409259,
+      "lon": 2.3781511
+    },
+    {
+      "type": "node",
+      "id": 3146958094,
+      "lat": 48.8413355,
+      "lon": 2.3775127
+    },
+    {
+      "type": "node",
+      "id": 4318493037,
+      "lat": 48.8417371,
+      "lon": 2.3768891
+    },
+    {
+      "type": "node",
+      "id": 4318493038,
+      "lat": 48.8422816,
+      "lon": 2.3760027
+    },
+    {
+      "type": "node",
+      "id": 4318493039,
+      "lat": 48.8439606,
+      "lon": 2.3729548
+    },
+    {
+      "type": "node",
+      "id": 3146958064,
+      "lat": 48.8335481,
+      "lon": 2.3859541,
+      "tags": {
+        "STIF:zone": "1",
+        "name": "Cour Saint-Émilion",
+        "public_transport": "stop_position",
+        "railway": "station",
+        "ref:FR:FANTOIR": "75112S105T",
+        "ref:FR:RATP": "50055",
+        "ref:FR:STIF": "21956",
+        "source": "STIF - 12/2016",
+        "station": "subway",
+        "subway": "yes",
+        "type:RATP": "metro",
+        "wheelchair": "yes",
+        "wikidata": "Q1137613",
+        "wikipedia": "fr:Cour Saint-Émilion (métro de Paris)"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4318493025,
+      "lat": 48.8332195,
+      "lon": 2.3856907
+    },
+    {
+      "type": "node",
+      "id": 4318493026,
+      "lat": 48.8338097,
+      "lon": 2.3861807
+    },
+    {
+      "type": "node",
+      "id": 3146958068,
+      "lat": 48.8341944,
+      "lon": 2.3865549
+    },
+    {
+      "type": "node",
+      "id": 3146958069,
+      "lat": 48.8348434,
+      "lon": 2.3871587
+    },
+    {
+      "type": "node",
+      "id": 3146958080,
+      "lat": 48.8356361,
+      "lon": 2.3873224
+    },
+    {
+      "type": "node",
+      "id": 3146958082,
+      "lat": 48.8361503,
+      "lon": 2.3870393
+    },
+    {
+      "type": "node",
+      "id": 3294731905,
+      "lat": 48.8368621,
+      "lon": 2.3859
+    },
+    {
+      "type": "node",
+      "id": 3294731913,
+      "lat": 48.8366003,
+      "lon": 2.3865003
+    },
+    {
+      "type": "node",
+      "id": 4318493027,
+      "lat": 48.8345657,
+      "lon": 2.3868902
+    },
+    {
+      "type": "node",
+      "id": 4318493028,
+      "lat": 48.8350874,
+      "lon": 2.387283
+    },
+    {
+      "type": "node",
+      "id": 4318493029,
+      "lat": 48.8353286,
+      "lon": 2.3873412
+    },
+    {
+      "type": "node",
+      "id": 4318493030,
+      "lat": 48.8358275,
+      "lon": 2.3873062
+    },
+    {
+      "type": "node",
+      "id": 4318493031,
+      "lat": 48.8359478,
+      "lon": 2.3872623
+    },
+    {
+      "type": "node",
+      "id": 4318493034,
+      "lat": 48.8364291,
+      "lon": 2.386746
+    },
+    {
+      "type": "way",
+      "id": 374417456,
+      "nodes": [
+        4318493021,
+        4318493020,
+        4318493019,
+        314951453,
+        4318493018,
+        264491193
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-3",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "STIF",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 445446055,
+      "nodes": [
+        4318493036,
+        3146958092,
+        3146958093,
+        3146958094,
+        4318493037,
+        4318493038,
+        1656938775,
+        4318493039,
+        3146958095,
+        4318493040,
+        4318463485,
+        4318463790,
+        4318463799,
+        3146958096,
+        3146958097,
+        3146958098,
+        3146958099,
+        4318463804,
+        4318463806,
+        4318463807,
+        4318463808,
+        3146958100,
+        4318463809,
+        3701327932,
+        3146958101,
+        3146958104,
+        3380233321,
+        3146958105,
+        4318463812,
+        3380233327,
+        4318493041,
+        3146958106,
+        4318493042,
+        4318493043,
+        4318493044,
+        3146958063,
+        3146958108,
+        4318493045,
+        3380233366,
+        4318493046,
+        3146958109,
+        3701328134,
+        3146958110,
+        4318493047,
+        3146958111,
+        4318493048,
+        3146958112,
+        3701328827,
+        3701328427,
+        4318493049,
+        3701327933,
+        4318493050,
+        3146958113,
+        3146958067,
+        4318493051,
+        3146958114,
+        4318493052,
+        4318493053,
+        3701328835,
+        4318493054,
+        3701328331,
+        3701328333,
+        4318493055,
+        4318493056,
+        4318493057,
+        3146958066,
+        4318493059,
+        3701328927,
+        3701329126,
+        3701328336,
+        4318493063,
+        4318493064,
+        4952500436,
+        4318493066,
+        3701329131,
+        243510338,
+        6372537884
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "indoor": "yes",
+        "layer": "-2",
+        "level": "-5",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "STIF",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 678701597,
+      "nodes": [
+        6354958625,
+        6354958626,
+        6354958627,
+        6354958628,
+        6354958625
+      ],
+      "tags": {
+        "area": "yes",
+        "bench": "yes",
+        "departures_board": "realtime",
+        "ele": "11.53",
+        "layer": "-5",
+        "level": "-5",
+        "lit": "yes",
+        "location": "underground",
+        "name": "Madeleine",
+        "network": "Métro de Paris;RATP",
+        "operator": "RATP",
+        "public_transport": "platform",
+        "railway": "platform",
+        "ref": "2",
+        "start_date": "1998-10-15",
+        "subway": "yes",
+        "surface": "paved",
+        "tunnel": "yes",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 680572855,
+      "nodes": [
+        4952500435,
+        6372538106,
+        6372538116,
+        6372538113,
+        6372538117,
+        6372538118,
+        6372538114,
+        6372538119,
+        6372538120,
+        6372538115,
+        6372538121,
+        6372538122,
+        6372538112,
+        6372538123,
+        6372538124,
+        6372538111,
+        6372538125,
+        6372538126,
+        6372538110,
+        6372538127,
+        6372538107,
+        6372538108,
+        4952500435
+      ],
+      "tags": {
+        "area": "yes",
+        "bench": "yes",
+        "departures_board": "realtime",
+        "height": "1.12",
+        "level": "-4",
+        "lit": "yes",
+        "location": "underground",
+        "name": "Saint-Lazare (Métro 14)",
+        "network": "Métro de Paris;RATP",
+        "operator": "RATP",
+        "public_transport": "platform",
+        "railway": "platform",
+        "ref": "2",
+        "start_date": "2003-12-16",
+        "subway": "yes",
+        "surface": "paved",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 125667163,
+      "nodes": [
+        3146958062,
+        3778069469
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-3",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 309364797,
+      "nodes": [
+        3146958062,
+        3778069470
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-3",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "APUR - 2014",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 432920738,
+      "nodes": [
+        3778069469,
+        4318493021
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-3",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "interpolation",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 374417457,
+      "nodes": [
+        4318493022,
+        3257481532,
+        3294731916,
+        3294731909,
+        4318493023,
+        3294731908,
+        4318493024,
+        4318493025,
+        3146958064,
+        4318493026,
+        3146958068,
+        4318493027,
+        3146958069,
+        4318493028,
+        4318493029,
+        3146958080,
+        4318493030,
+        4318493031,
+        3146958082,
+        4318493034,
+        3294731913,
+        3294731905,
+        3294731904,
+        3294731912,
+        3294731915,
+        3294731914,
+        3294731911,
+        3294731910,
+        3294731906,
+        3294731907,
+        4318493035,
+        3146958061,
+        4318493036
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-4",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "http://www.adapter-les-stations-de-la-ligne14.com",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    },
+    {
+      "type": "way",
+      "id": 433096697,
+      "nodes": [
+        3778069470,
+        3257481531,
+        3294731917,
+        5458808304,
+        4318493022
+      ],
+      "tags": {
+        "electrified": "rail",
+        "frequency": "0",
+        "gauge": "1435",
+        "layer": "-2",
+        "level": "-4",
+        "name": "Métro 14",
+        "name:ru": "Линия 14",
+        "operator": "RATP",
+        "railway": "subway",
+        "rubber_tires": "yes",
+        "source": "interpolation",
+        "tunnel": "yes",
+        "voltage": "750"
+      }
+    }
+  ]
+}
