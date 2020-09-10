@@ -1,8 +1,5 @@
-/*
-    Hello source-viewers!
-    We're glad you're interested in how Tangram can be used to make amazing maps!
-    - The Tangram team
-*/
+/* jshint -W033 */
+
 
 (function () {
     var scene_url = 'demos/scene.yaml';
@@ -38,11 +35,24 @@
         zoomSnap: 0,
         keyboard: false
     });
+
     var blocage = false
-    var line_points = []
-    var debut_des_segments = []
-    var fin_des_segments = []
-    var noms_des_segments = []
+
+    var waypoints = []
+    var stations = []
+
+    var train_marker = null
+
+    //CONSTANTES DE CONDUITE
+    var stades_vitesse = [
+        -5, /* FREINAGE D'URGENCE */
+        -4, -3, -2, -1, /* FREINAGE CLASSIQUE */
+        0, /* IDLE + FREINAGE DESSERE */
+        1, 2, 3, 4, 5 /* ACCELERATION */
+    ]
+    var drag = 1
+    var stade_actuel = 8
+    var vitesse_actuelle = 0
 
 
     // Useful events to subscribe to
@@ -55,128 +65,83 @@
         },
         pre_update: function (will_render) {
             // before scene update
-            // zoom in/out if up/down arrows pressed
-            var vitesse = 0.000005;
 
             if (key.isPressed('up') && !blocage) {
                 blocage = true
+                var way_ids = []
 
                 //Code basé sur overpass api (ligne14.json)
                 fetch('../ligne14.json')
                     .then(response => response.json())
-                    .then(obj => {
-                        console.log(obj)
+                    .then(obj => { //Démonstration de l'acquisition des données
                         let node_depart = obj.elements[0]
 
-                        var next_way = get_way_with_node(node_depart.id, obj)
-                        console.log(next_way)
-                        console.log(get_next_way_of_way(next_way, obj))
-                    })
+                        var [next_way, is_first_point] = get_way_with_node(node_depart.id, obj)
+                        var connecting_waypoint = is_first_point ? next_way.nodes[0] : next_way.nodes[next_way.nodes.length - 1];
 
+                        var id_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span")
+                        var name_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(5) > div > span")
 
-                /*scene.queryFeatures({
-                    filter: {
-                        $layer: 'transit',
-                        kind: 'subway'
-                    },
-                    group_by: 'ref',
-                    geometry: true
-                }).then(results => {
-                    console.log("queryFeatures")
-                    results[14].forEach(line => {
-                        console.log(line)
-                        console.log("BLOC : " + line_points.length)
-                        console.log(line.geometry.coordinates[0])
-                        console.log(line.geometry.coordinates[line.geometry.coordinates.length-1])
-                        debut_des_segments.push(line.geometry.coordinates[0])
-                        fin_des_segments.push(line.geometry.coordinates[line.geometry.coordinates.length-1])
-                        noms_des_segments.push(results[14].indexOf(line))
+                        try {
+                            //while (next_way != null) {
+                            for (var i = 0; i <= 10; i++) {
+                                way_ids.push(next_way.id)
 
-                        line.geometry.coordinates.forEach(feature => {
-                            if(feature.length > 2) {
-                                feature.forEach(f => {
-                                    let latlng = [f[1], f[0]]
-                                    if(!arrayAlreadyHasArray(line_points, latlng)) {
-                                        L.marker(latlng).addTo(map);
-                                        line_points.push(latlng)
+                                console.log("SECTION " + i + " connected by waypoint " + connecting_waypoint)
+                                console.log(next_way)
+
+                                get_sorted_nodes(next_way, connecting_waypoint).forEach(node => {
+                                    waypoints.push(get_coords_of_node(node, obj))
+
+                                    var node_name = get_name_of_node(node, obj)
+                                    if (node_name != null && !stations.includes(node_name)) {
+                                        stations.push(node_name)
                                     }
                                 })
-                            } else {
-                                let latlng = [feature[1], feature[0]]
-                                if(!arrayAlreadyHasArray(line_points, latlng)) {
-                                    L.marker(latlng).addTo(map);
-                                    line_points.push(latlng)
-                                }
-                            }
-                            
-                          });
-                    })
 
-                    var timeout_value = 1000
-                    var j = 0
-                    line_points.forEach(point => {
-                        var new_pos = {
-                            lat: point[0],
-                            lng: point[1]
+                                var temp = get_next_way_of_way(next_way, way_ids, obj)
+                                is_first_point = temp[1]
+                                connecting_waypoint = is_first_point ? next_way.nodes[0] : next_way.nodes[next_way.nodes.length - 1];
+                                next_way = temp[0]
+                            }
+                        } catch {
+                            console.log("Fin de l'acquisition de la ligne")
                         }
-                        timeout_value += 1000
+                        console.log(waypoints.length)
+                        if(waypoints.length < 40) {
+                            alert("Le nombre d'arrêts est anormalement court. Il y a une erreur sur OpenStreetMap.")
+                        } else {
+                            document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div").textContent = "Line loaded !"
+                        }
+                        
                         setTimeout(() => {
-                            j++
-                            console.log(j)
-                            map._move(new_pos, map.getZoom());
-                            map._moveEnd(true);
-                        }, timeout_value);
+                            blocage = false
+                            console.log("Vous pouvez commencer à conduire !")
+                        }, 1000);
                     })
-                    
-                    blocage = false
-                })*/
-
-                /*scene.queryFeatures({
-                    filter: {
-                        $layer: 'transit',
-                        kind: 'subway'
-                    },
-                    group_by: 'ref',
-                    geometry: true
-                }).then(results => {
-                    console.log("iter n1")
-                    console.log(results)
-                    var timeout_value = 1000
-
-                    //Object.values(results).forEach(line => {
-                    let line = Object.values(results)[0]
-                    console.log("line n2")
-                    console.log(line)
-                    document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span").textContent = line[0].properties.name
-
-                    line[0].geometry.coordinates.forEach(coord => {
-                            var new_pos = {
-                                lat: coord[1],
-                                lng: coord[0]
-                            }
-                            timeout_value += 1000
-                            setTimeout(() => {
-                                map._move(new_pos, map.getZoom());
-                                map._moveEnd(true);
-                            }, timeout_value);
-                    })
-
-                    setTimeout(() => {
-                        blocage = false
-                        console.log("débloquage")
-                    }, timeout_value);
-                    //})
-                });*/
-
             }
-            if (key.isPressed('down')) {
-                var new_pos = {
-                    lat: map.getCenter().lat - vitesse,
-                    lng: map.getCenter().lng,
-                    zoom: 25.0
-                }
-                map._move(new_pos, map.getZoom());
-                map._moveEnd(true);
+
+            if (key.isPressed('down') && !blocage) { //Démonstration de la conduite
+                console.log("Module de conduite chargé.")
+                blocage = true
+                train_marker = L.motion.polyline(waypoints, {
+
+                }, {
+                    auto: true,
+                    speed: 1000
+                }, {
+                    title: "2555641",
+                }).addTo(map);
+                train_marker.motionStart();
+            }
+
+            if (train_marker != null) {
+                map.flyTo(train_marker.__marker._latlng)
+
+                /* MAJ DES VARIABLES DE CONDUITE */
+                //vitesse_actuelle = vitesse_actuelle - drag + stades_vitesse[stade_actuel] * 0.1
+                //train_marker.motionSpeed(100)
+                //train_marker.motionSpeed(vitesse_actuelle)
             }
         },
         post_update: function (will_render) {
@@ -200,41 +165,74 @@
         layer.closeTooltip()
     }); // close tooltip when zooming
 
+
+    //OTS FUNCTIONS
     function get_way_with_node(id, json) {
         var trouve = false
         var i = 0
-        while(!trouve && i < json.elements.length) {
-            if(json.elements[i].nodes) {
+        while (!trouve && i < json.elements.length) {
+            if (json.elements[i].nodes) {
                 trouve = json.elements[i].nodes.includes(id)
             }
             i++
         }
 
-        if(trouve)
-            return json.elements[i-1]
-        else
-            return null
+        if (trouve)
+            return [json.elements[i - 1], false]
+
+        return [null, null]
     }
 
-    function get_next_way_of_way(way, json) {
-        const first_point_id = way.nodes[0]
-        const last_point_id = way.nodes[way.nodes.length-1]
+    function get_next_way_of_way(way, way_list, json) {
+        var first_point_id = way.nodes[0]
+        var last_point_id = way.nodes[way.nodes.length - 1]
 
         var trouve = false
         var i = 0
-        while(!trouve && i < json.elements.length) {
-            if(json.elements[i].nodes) {
-                trouve = (json.elements[i].nodes.includes(first_point_id) || json.elements[i].nodes.includes(last_point_id)) && json.elements[i].id != way.id
+        while (!trouve && i < json.elements.length) {
+            if (json.elements[i].nodes) {
+                trouve = (json.elements[i].nodes.includes(first_point_id) || json.elements[i].nodes.includes(last_point_id)) && !way_list.includes(json.elements[i].id) && !arrayEquals(way.nodes, json.elements[i].nodes)
             }
             i++
         }
 
-        if(trouve)
-            return json.elements[i-1]
-        else
-            return null
+        if (trouve)
+            return [json.elements[i - 1], json.elements[i - 1].nodes.includes(first_point_id)]
+        return [null, null]
     }
 
+    function get_sorted_nodes(way, connecting_waypoint_id) {
+        if (way.nodes.indexOf(connecting_waypoint_id) >= way.nodes.length / 2) {
+            console.log("This section was reversed")
+            return way.nodes.reverse()
+        }
+        return way.nodes
+    }
+
+    function get_coords_of_node(node_id, json) {
+        let node = json.elements.find(el => el.id == node_id)
+        return [node.lat, node.lon]
+    }
+
+    function get_name_of_node(node_id, json) {
+        let node = json.elements.find(el => el.id == node_id)
+        if (node.tags && node.tags.name)
+            return node.tags.name
+        return null
+    }
+
+    function arrayEquals(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    //TANGRAM FUNCTIONS
     function onHover(selection) {
         var feature = selection.feature;
         if (feature) {
