@@ -37,6 +37,7 @@
     });
 
     var blocage = false
+    var blocage_commandes = false
 
     var waypoints = []
     var stations = []
@@ -53,6 +54,7 @@
     var drag = 1
     var stade_actuel = 8
     var vitesse_actuelle = 0
+    var speed_multiplier = 3 //for shorter game sessions
 
 
     // Useful events to subscribe to
@@ -74,7 +76,7 @@
                 fetch('../ligne14.json')
                     .then(response => response.json())
                     .then(obj => { //Démonstration de l'acquisition des données
-                        let node_depart = obj.elements[0]
+                        let node_depart = get_starting_node(obj)
 
                         var [next_way, is_first_point] = get_way_with_node(node_depart.id, obj)
                         var connecting_waypoint = is_first_point ? next_way.nodes[0] : next_way.nodes[next_way.nodes.length - 1];
@@ -83,8 +85,9 @@
                         var name_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(5) > div > span")
 
                         try {
-                            //while (next_way != null) {
-                            for (var i = 0; i <= 10; i++) {
+                            var i = 0
+                            while (next_way != null) {
+                            //for (var i = 0; i <= 5; i++) {
                                 way_ids.push(next_way.id)
 
                                 console.log("SECTION " + i + " connected by waypoint " + connecting_waypoint)
@@ -103,17 +106,25 @@
                                 is_first_point = temp[1]
                                 connecting_waypoint = is_first_point ? next_way.nodes[0] : next_way.nodes[next_way.nodes.length - 1];
                                 next_way = temp[0]
+
+                                i++
                             }
-                        } catch {
-                            console.log("Fin de l'acquisition de la ligne")
+                        } catch(error) {
+                            console.error(error)
+                            console.log("-- Fin de l'acquisition de la ligne --")
                         }
                         console.log(waypoints.length)
-                        if(waypoints.length < 40) {
-                            alert("Le nombre d'arrêts est anormalement court. Il y a une erreur sur OpenStreetMap.")
+                        if (waypoints.length < 40) {
+                            //alert("Le nombre d'arrêts est anormalement court. Il y a une erreur sur OpenStreetMap.")
+                            //TODO vider et recommencer l'acquisition en demandant de choisir le starting node manuellement
                         } else {
-                            document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div").textContent = "Line loaded !"
+                            if (next_way && next_way.tags && next_way.tags.name) {
+                                document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div").textContent = next_way.tags.name
+                            } else {
+                                document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div").textContent = "Line loaded."
+                            }
                         }
-                        
+
                         setTimeout(() => {
                             blocage = false
                             console.log("Vous pouvez commencer à conduire !")
@@ -125,23 +136,56 @@
                 console.log("Module de conduite chargé.")
                 blocage = true
                 train_marker = L.motion.polyline(waypoints, {
-
+                    color: "transparent"
                 }, {
                     auto: true,
-                    speed: 1000
+                    speed: 10
                 }, {
                     title: "2555641",
+                    icon: L.divIcon({html: "<img src='train.svg' style='width: 35px; height: 35px;'></img>", iconSize: L.point(27.5, 24)})
                 }).addTo(map);
                 train_marker.motionStart();
+
+                var data_bar = document.querySelector("#map > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-pelias-control.leaflet-bar.leaflet-control.leaflet-pelias-expanded > input")
+
+                var loop = setInterval(function(train_marker) {
+                    /* MAJ DES VARIABLES DE CONDUITE */
+                    vitesse_actuelle = vitesse_actuelle - drag + stades_vitesse[stade_actuel] * 3 * speed_multiplier
+                    if(vitesse_actuelle > 2000) {
+                        vitesse_actuelle = 2000
+                    } else if(vitesse_actuelle <= 0) {
+                        vitesse_actuelle = 0.01
+                    }
+
+                    console.log(vitesse_actuelle)
+                    data_bar.setAttribute("placeholder","LEVIER DE TRACTION : " + stades_vitesse[stade_actuel] + " / VITESSE : " + vitesse_actuelle)
+                    
+                    train_marker.motionSpeed(vitesse_actuelle)
+                }, 1000, train_marker)
+            }
+
+            if (key.isPressed('left') && !blocage_commandes) { //Démonstration de la conduite
+                blocage_commandes = true
+                stade_actuel = (stade_actuel > 0) ? stade_actuel - 1 : stade_actuel;
+                console.log("CRAN " + stades_vitesse[stade_actuel])
+
+                setTimeout(() => {
+                    blocage_commandes = false
+                }, 300);
+            }
+
+            if (key.isPressed('right') && !blocage_commandes) { //Démonstration de la conduite
+                blocage_commandes = true
+                stade_actuel = (stade_actuel < stades_vitesse.length -1) ? stade_actuel + 1 : stade_actuel;
+                console.log("CRAN " + stades_vitesse[stade_actuel])
+
+                setTimeout(() => {
+                    blocage_commandes = false
+                }, 300);
             }
 
             if (train_marker != null) {
                 map.flyTo(train_marker.__marker._latlng)
-
-                /* MAJ DES VARIABLES DE CONDUITE */
-                //vitesse_actuelle = vitesse_actuelle - drag + stades_vitesse[stade_actuel] * 0.1
-                //train_marker.motionSpeed(100)
-                //train_marker.motionSpeed(vitesse_actuelle)
             }
         },
         post_update: function (will_render) {
@@ -167,6 +211,24 @@
 
 
     //OTS FUNCTIONS
+
+    function get_starting_node(json) {
+        var trouve = false
+        var i = 0
+        var node
+
+        while (!trouve && i < json.elements.length) {
+            node = json.elements[i]
+            trouve = node.tags && node.tags.name
+            i++
+        }
+
+        if (trouve)
+            return node
+
+        alert("ERROR: There's no starting node on this line.")
+    }
+
     function get_way_with_node(id, json) {
         var trouve = false
         var i = 0
