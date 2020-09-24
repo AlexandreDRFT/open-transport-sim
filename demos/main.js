@@ -25,8 +25,7 @@
         debug: {
             // layer_stats: true // enable to collect detailed layer stats, access w/`scene.debug.layerStats()`
             // wireframe: true // enable for wireframe rendering mode
-        },
-        logLevel: 'debug'
+        }
     });
 
     // Create a Leaflet map
@@ -35,6 +34,7 @@
         zoomSnap: 0,
         keyboard: false
     });
+    map.setMaxZoom(50);
 
     //OBJETS DU JEU
     var blocage = false
@@ -43,7 +43,6 @@
     var waypoints = []
     var stations = []
     var stations_waypoints = []
-    var next_station_index = 0
 
     var train_marker = null
 
@@ -54,19 +53,22 @@
     let max_speed = 4000
 
     //VARIABLES DE CONDUITE
+    var next_station_index = 0
     var stades_vitesse = [
         -5, /* FREINAGE D'URGENCE */
         -4, -3, -2, -1, /* FREINAGE CLASSIQUE */
         0, /* IDLE + FREINAGE DESSERE */
         1, 2, 3, 4, 5 /* ACCELERATION */
     ]
-    var stade_actuel = 8
+    var stade_actuel = 6
     var vitesse_actuelle = 0
     var portes_ouvertes = false
+    var distance_to_next_station = 1000
 
     setTimeout(() => {
         document.querySelector("#map > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-control-zoom.leaflet-bar.leaflet-control").remove()
         document.querySelector("#map > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-pelias-control.leaflet-bar.leaflet-control.leaflet-pelias-expanded > a").remove()
+        document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div").textContent = "Press Up to load the line."
     }, 500);
 
 
@@ -147,7 +149,7 @@
             }
 
             /* START DRIVING */
-            if (key.isPressed('down') && !blocage) { //Démonstration de la conduite
+            if (key.isPressed('down') && !blocage) {
                 console.log("Module de conduite chargé.")
                 blocage = true
                 train_marker = L.motion.polyline(waypoints, {
@@ -164,21 +166,23 @@
                 }).addTo(map);
                 train_marker.motionStart();
 
-                var data_bar = document.querySelector("div.leaflet-pelias-control > input")
-                var distance_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span")
+                let data_bar = document.querySelector("div.leaflet-pelias-control > input")
+                let distance_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span")
+                let barre_statut = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div")
 
                 //FIRST DISPLAY
+                barre_statut.textContent = "Les portes sont fermées."
                 data_bar.setAttribute("placeholder", "LEVIER DE TRACTION : " + stades_vitesse[stade_actuel] + " / VITESSE : " + Math.round(vitesse_actuelle))
                 distance_display.textContent = "Distance to next station : " + 100 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
                 data_bar.setAttribute('size', data_bar.getAttribute('placeholder').length);
 
                 var name_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(5) > div > span")
 
-                name_display.textContent = stations[next_station_index]
+                name_display.textContent = "Next station : " + stations[next_station_index]
 
                 var game_loop = setInterval(function (train_marker) {
                     /* BOUCLE DE MAJ DES VARIABLES DE CONDUITE */
-                    if (stades_vitesse[stade_actuel] >= 0) { //ACCELERATION
+                    if (stades_vitesse[stade_actuel] > 0) { //ACCELERATION
                         if (vitesse_actuelle >= max_speed) {
                             vitesse_actuelle = max_speed
                         } else {
@@ -194,7 +198,14 @@
 
                     data_bar.setAttribute("placeholder", "LEVIER DE TRACTION : " + stades_vitesse[stade_actuel] + " / VITESSE : " + Math.round(vitesse_actuelle)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
                     train_marker.motionSpeed(vitesse_actuelle)
-                    distance_display.textContent = "Distance to next station : " + 100 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
+
+                    if (vitesse_actuelle > 0.01) {
+                        distance_to_next_station = 100 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
+                        if (distance_to_next_station != null) {
+                            console.log(distance_to_next_station)
+                            distance_display.textContent = "Distance to next station : " + distance_to_next_station
+                        }
+                    }
 
                     /* MAJ DES PANNEAUX INDICATEURS */
                     /*if (train_marker.__marker._latlng.distanceToNextPoint < 5) {
@@ -207,7 +218,7 @@
             }
 
             /* DECCELERATE */
-            if (key.isPressed('left') && !blocage_commandes) { //Démonstration de la conduite
+            if (key.isPressed('left') && !blocage_commandes) {
                 blocage_commandes = true
                 stade_actuel = (stade_actuel > 0) ? stade_actuel - 1 : stade_actuel;
 
@@ -217,7 +228,7 @@
             }
 
             /* ACCELERATE */
-            if (key.isPressed('right') && !blocage_commandes) { //Démonstration de la conduite
+            if (key.isPressed('right') && !blocage_commandes) {
                 blocage_commandes = true
                 stade_actuel = (stade_actuel < stades_vitesse.length - 1) ? stade_actuel + 1 : stade_actuel;
 
@@ -225,29 +236,35 @@
                     blocage_commandes = false
                 }, 300);
             }
-            
+
             /* OPEN DOORS */
-            if (key.isPressed('enter') && !blocage_commandes) { //Ouverture des portes
+            if (key.isPressed('enter') && !blocage_commandes) {
                 let barre_statut = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div")
 
                 blocage_commandes = true
-                if(stades_vitesse[stade_actuel] < 0 && !portes_ouvertes) {
+                if (stades_vitesse[stade_actuel] < 0 && !portes_ouvertes) {
                     barre_statut.textContent = "Les portes sont ouvertes."
                     portes_ouvertes = true
-                } else if(stades_vitesse[stade_actuel] <= 0 && portes_ouvertes) {
-                    barre_statut.textContent = "Les portes sont fermées."
+                    setTimeout(() => {
+                        barre_statut.textContent = "Tous les passagers sont montés !"
+                    }, 10000);
+                } else if (stades_vitesse[stade_actuel] <= 0 && portes_ouvertes) {
+                    barre_statut.textContent = "Les portes se ferment ..."
                     portes_ouvertes = false
+                    setTimeout(() => {
+                        barre_statut.textContent = "Les portes sont fermées."
+                    }, 3000);
                 } else {
                     barre_statut.textContent = "Serrez le frein avant d'ouvrir les portes !"
                 }
 
                 setTimeout(() => {
                     blocage_commandes = false
-                }, 300);
+                }, 500);
             }
 
             /* UPDATE GAME CAMERA */
-            if (train_marker != null) {
+            if (train_marker != null && vitesse_actuelle > 0.01) {
                 map.flyTo(train_marker.__marker._latlng)
             }
         },
@@ -312,9 +329,9 @@
             while (next_way != null) {
                 temp_way_ids.push(next_way.id)
                 var temp = get_next_way_of_way(next_way, temp_way_ids, json)
-                console.log(temp[0])
-                
-                if(temp[0] != null) {
+                //console.log(temp[0])
+
+                if (temp[0] != null) {
                     next_way = temp[0]
                     is_first_point = temp[1]
                 } else {

@@ -65,15 +65,13 @@ textures:
 styles:
     buildings:
         base: polygons
-        blend: translucent
+        blend: opaque
         shaders:
             blocks:
                 color: |
                     // Shade by building height
                     color.rgb *= vec3((worldPosition().z*.0005 + .9));
 
-                    // Add translucency at higher zoom
-                    color.a = clamp(mix(1., 0., (u_map_position.z - 15.) * .25), .5, 1.);
 
     transit-lines:
         base: lines
@@ -82,8 +80,8 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb *= 1.25; // pump up the colors
-                    color.a *= 0.5;     // translucent
+                    //color.rgb *= 1.25; // pump up the colors
+                    color.a *= 0.8;     // translucent
         draw: # default draw parameters
             color: function() { return feature.colour_name; }
             width: 6px
@@ -188,7 +186,7 @@ layers:
                 polygons:
                     order: global.feature_order
                     interactive: true
-                    color: honeydew
+                    color: [0.502, 0.502, 0.502, 0.65]
 
 
             parks:
@@ -769,7 +767,7 @@ layers:
 
     transit:
         data: { source: tilezen }
-        filter: { $zoom: { min: 15 } }
+        filter: { $zoom: { min: 6}}
         draw:
             lines:
                 style: transit-lines
