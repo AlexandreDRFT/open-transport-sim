@@ -12,7 +12,16 @@ body {
 }
 
 #map > div.leaflet-control-container > div.leaflet-top.leaflet-left > div.leaflet-pelias-control.leaflet-bar.leaflet-control.leaflet-pelias-expanded {
-    width: 350px!important;
+    width: 450px;
+}
+
+li.cr.function > div > span.property-name {
+    display: contents;
+}
+
+div.leaflet-marker-icon {
+    background: transparent!important;
+    border: transparent!important;
 }
 
 div > .leaflet-pelias-control {
