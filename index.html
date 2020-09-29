@@ -10,13 +10,15 @@ http://mapzen.com/tangram
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tangram: WebGL for maps</title>
+    <title>open-transport-sim</title>
+    <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="demos/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.9.4/leaflet-geocoder-mapzen.css">
 
     <!-- 3rd party libraries -->
+    <link rel="stylesheet" href="dist/tingle.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.9.4/leaflet-geocoder-mapzen.js">
     </script> <!-- leaflet plugin for pelias search UI -->
@@ -25,17 +27,19 @@ http://mapzen.com/tangram
     <script defer src="demos/lib/keymaster.js"></script> <!-- Keymaster handles keyboard input -->
 
     <!-- Tangram library -->
-    <!-- modern browsers load the optimized .mjs file, older browsers (IE11) load the transpiled .js file -->
     <script src="https://unpkg.com/tangram/dist/tangram.min.js"></script>
     <script defer src="dist/leaflet.motion.min.js"></script>
 
-    <!-- Tangram demo code -->
+    <!-- Game -->
     <script defer type="module" src="demos/main.js"></script>
 
     <!-- Tangram demo extras -->
     <script defer src="demos/app/url.js"></script> <!-- URL parsing -->
     <script defer src="demos/app/key.js"></script> <!-- demo key setup -->
     <script defer src="demos/app/gui.js"></script> <!-- UI for configuring map -->
+
+    <!-- popup -->
+    <script src="dist/tingle.min.js"></script>
 
     <script>
         var exports = {};

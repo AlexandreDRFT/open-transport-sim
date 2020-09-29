@@ -33,7 +33,7 @@ cameras:
 
 scene:
     background:
-        color: '#f0ebeb'
+        color: rgb(168,218,181)
 
 fonts:
     Montserrat:
@@ -186,8 +186,7 @@ layers:
                 polygons:
                     order: global.feature_order
                     interactive: true
-                    color: [0.502, 0.502, 0.502, 0.65]
-
+                    color: [0.541, 0.875, 0.620, 1.00]
 
             parks:
                 filter: { kind: [park, graveyard, cemetery, forest, recreation_ground] }
@@ -203,17 +202,22 @@ layers:
                 filter: { kind: [commercial, industrial] }
                 draw:
                     polygons:
-                        color: '#C0CDCD'
+                        color: [0.867, 0.922, 0.922, 1.00]
+            farmland:
+                filter: { kind: [farmland] }
+                draw:
+                    polygons:
+                        color: [0.541, 0.875, 0.620, 1.00]
             civic:
                 filter: { kind: university }
                 draw:
                     polygons:
-                        color: '#D9CFC3'
+                        color: [0.749, 0.831, 0.929, 1.00]
             urban:
                 filter: { kind: urban_area }
                 draw:
                     polygons:
-                        color: [[7, lightgrey], [9, [.88, .88, .88]]]
+                        color: [0.925, 0.898, 0.898, 1.00]
 
     water:
         data: { source: tilezen }

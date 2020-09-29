@@ -47,10 +47,21 @@
     var train_marker = null
 
     //CONSTANTES DE CONDUITE (a déplacer dans un fichier config)
-    var drag = 1
-    var speed_multiplier = 3 //for shorter game sessions
+    var drag = 0.1
+    var game_mode_index = 2 //0 for Simulation, 1 for Faster routes, 2 for Arcade
+    var speed_multipliers = [
+        1 /* Simulation */ ,
+        3 /* Faster routes */ ,
+        9 /* Arcade */
+    ]
+    var speed_multiplier = speed_multipliers[game_mode_index] //for shorter game sessions
     var brake_multiplier = 1.3 //how stronger is breaking compared to accelerating
-    let max_speed = 4000
+    var max_speeds = [
+        130,
+        300,
+        4000
+    ]
+    let max_speed = max_speeds[game_mode_index]
 
     //VARIABLES DE CONDUITE
     var next_station_index = 0
@@ -92,7 +103,7 @@
                 barre_statut.textContent = "Chargement de la ligne ..."
 
                 //Code basé sur overpass api
-                fetch('https://www.overpass-api.de/api/interpreter?data=[out:json][timeout:50];%20(%20relation(1972920);%20);%3E;out%20body%20qt;')
+                fetch('https://www.overpass-api.de/api/interpreter?data=[out:json][timeout:50];%20(%20relation(8537344);%20);%3E;out%20body%20qt;')
                     .then(response => response.json())
                     .then(obj => { //Démonstration de l'acquisition des données
                         var [next_way, is_first_point] = get_starting_way(obj)
@@ -149,7 +160,7 @@
             }
 
             /* START DRIVING */
-            if (key.isPressed('down') && !blocage) {
+            if (key.isPressed('down') && !blocage && waypoints.length > 1) {
                 console.log("Module de conduite chargé.")
                 blocage = true
                 train_marker = L.motion.polyline(waypoints, {
@@ -186,13 +197,13 @@
                         if (vitesse_actuelle >= max_speed) {
                             vitesse_actuelle = max_speed
                         } else {
-                            vitesse_actuelle = vitesse_actuelle - drag + stades_vitesse[stade_actuel] * 3 * speed_multiplier
+                            vitesse_actuelle = vitesse_actuelle - drag * speed_multiplier + stades_vitesse[stade_actuel] * speed_multiplier
                         }
                     } else { //FREINAGE
                         if (vitesse_actuelle <= 0.01) {
                             vitesse_actuelle = 0.01
                         } else {
-                            vitesse_actuelle = vitesse_actuelle - drag + stades_vitesse[stade_actuel] * 3 * speed_multiplier * brake_multiplier
+                            vitesse_actuelle = vitesse_actuelle - drag * speed_multiplier + stades_vitesse[stade_actuel] * speed_multiplier * brake_multiplier
                         }
                     }
 
@@ -200,18 +211,17 @@
                     train_marker.motionSpeed(vitesse_actuelle)
 
                     if (vitesse_actuelle > 0.01) {
-                        distance_to_next_station = 100 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
-                        if (distance_to_next_station != null) {
-                            console.log(distance_to_next_station)
+                        distance_to_next_station = Math.abs(Math.round(1000000 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)))) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
+                        if (distance_to_next_station != undefined) {
                             distance_display.textContent = "Distance to next station : " + distance_to_next_station
+
+                            if(distance_to_next_station < 200) {
+                                //Màj de la prochaine station
+                                next_station_index++
+                                name_display.textContent = stations[next_station_index]
+                            }
                         }
                     }
-
-                    /* MAJ DES PANNEAUX INDICATEURS */
-                    /*if (train_marker.__marker._latlng.distanceToNextPoint < 5) {
-                        next_station_index++
-                        name_display.textContent = stations[next_station_index]
-                    }*/
 
                     /* --- FIN BOUCLE DE MAJ DES VARIABLES DE CONDUITE ---*/
                 }, 200, train_marker)
@@ -243,7 +253,7 @@
 
                 blocage_commandes = true
                 if (stades_vitesse[stade_actuel] < 0 && !portes_ouvertes) {
-                    barre_statut.textContent = "Les portes sont ouvertes."
+                    barre_statut.textContent = "Les portes sont ouvertes ..."
                     portes_ouvertes = true
                     setTimeout(() => {
                         barre_statut.textContent = "Tous les passagers sont montés !"
@@ -261,6 +271,67 @@
                 setTimeout(() => {
                     blocage_commandes = false
                 }, 500);
+            }
+
+            if (key.isPressed('h') && !blocage) {
+                blocage = true
+                console.log("DEBUG/ SELECTION D'UNE NOUVELLE LIGNE")
+
+
+                fetch('https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A50%5D%3B%0A%28%0A%20%20relation%2848.68960056688%2C2.097015380859375%2C48.99283383694351%2C2.676544189453125%29%5Broute%3Dsubway%5D%5Btype%3Droute%5D%3B%0A%20%20relation%2848.68960056688%2C2.097015380859375%2C48.99283383694351%2C2.676544189453125%29%5Broute%3Dtrain%5D%5Btype%3Droute%5D%3B%0A%29%3B%0Aout%20tags%20asc%3B%0A')
+                    .then(response => response.json())
+                    .then(obj => { //Démonstration de l'acquisition des données dynamique
+                        const line_list = obj.elements.map(el => el.tags.name).sort()
+                        console.log(line_list)
+
+                        // instanciate new modal
+                        var modal = new tingle.modal({
+                            footer: true,
+                            stickyFooter: false,
+                            closeMethods: ['overlay', 'button', 'escape'],
+                            closeLabel: "Close",
+                            cssClass: ['custom-class-1', 'custom-class-2'],
+                            onOpen: function () {
+                                console.log('modal open');
+                            },
+                            onClose: function () {
+                                console.log('modal closed');
+                            },
+                            beforeClose: function () {
+                                // here's goes some logic
+                                // e.g. save content before closing the modal
+                                return true; // close the modal
+                                return false; // nothing happens
+                            }
+                        });
+
+                        // set content
+                        modal.setContent('<h1>here\'s some content</h1>');
+
+                        // add a button
+                        modal.addFooterBtn('Button label', 'tingle-btn tingle-btn--primary', function () {
+                            // here goes some logic
+                            modal.close();
+                        });
+
+                        // add another button
+                        modal.addFooterBtn('Dangerous action !', 'tingle-btn tingle-btn--danger', function () {
+                            // here goes some logic
+                            modal.close();
+                        });
+
+                        // open modal
+                        modal.open();
+
+                        // close modal
+                        modal.close();
+
+                        setTimeout(() => {
+                            blocage = false
+                        }, 200);
+                    })
+
+
             }
 
             /* UPDATE GAME CAMERA */
