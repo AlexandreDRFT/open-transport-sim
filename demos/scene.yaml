@@ -33,7 +33,7 @@ cameras:
 
 scene:
     background:
-        color: rgb(168,218,181)
+        color: [0.898, 0.929, 0.906, 1.00]
 
 fonts:
     Montserrat:
@@ -203,6 +203,11 @@ layers:
                 draw:
                     polygons:
                         color: [0.867, 0.922, 0.922, 1.00]
+            residential:
+                filter: { kind: [residential] }
+                draw:
+                    polygons:
+                        color: [0.910, 0.859, 0.863, 1.00]
             farmland:
                 filter: { kind: [farmland] }
                 draw:

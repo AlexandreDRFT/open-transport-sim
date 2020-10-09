@@ -95,7 +95,7 @@
             // before scene update
 
             /* LOADING THE LINE */
-            if (key.isPressed('up') && !blocage) {
+            if (key.isPressed('up') && !blocage && waypoints.length <= 1) {
                 blocage = true
                 var way_ids = []
 
@@ -103,11 +103,14 @@
                 barre_statut.textContent = "Chargement de la ligne ..."
 
                 //Code basé sur overpass api
-                fetch('https://www.overpass-api.de/api/interpreter?data=[out:json][timeout:50];%20(%20relation(8537344);%20);%3E;out%20body%20qt;')
+                let line_code = 7911336
+                fetch('https://www.overpass-api.de/api/interpreter?data=[out:json][timeout:50];%20(%20relation('+line_code+');%20);%3E;out%20body%20qt;')
                     .then(response => response.json())
                     .then(obj => { //Démonstration de l'acquisition des données
                         var [next_way, is_first_point] = get_starting_way(obj)
+                        console.log("The first way is : ")
                         console.log(next_way)
+                        console.log("------")
                         var connecting_waypoint = is_first_point ? next_way.nodes[0] : next_way.nodes[next_way.nodes.length - 1];
 
                         try {
@@ -115,8 +118,8 @@
                             while (next_way != null) {
                                 way_ids.push(next_way.id)
 
-                                //console.log("SECTION " + i + " connected by waypoint " + connecting_waypoint)
-                                //console.log(next_way)
+                                console.log("SECTION " + i + " connected by waypoint " + connecting_waypoint)
+                                console.log(next_way)
 
                                 get_sorted_nodes(next_way, connecting_waypoint).forEach(node => {
                                     waypoints.push(get_coords_of_node(node, obj))
@@ -139,7 +142,8 @@
                             console.error(error)
                             console.log("-- Fin de l'acquisition de la ligne --")
                         }
-                        console.log(waypoints.length)
+                        console.log(waypoints.length + " waypoints")
+                        console.log(stations)
                         if (waypoints.length < 40) {
                             //alert("Le nombre d'arrêts est anormalement court. Il y a une erreur sur OpenStreetMap.")
                             //TODO vider et recommencer l'acquisition en demandant de choisir le starting node manuellement
@@ -178,17 +182,15 @@
                 train_marker.motionStart();
 
                 let data_bar = document.querySelector("div.leaflet-pelias-control > input")
-                let distance_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span")
+                let name_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(4) > div > span")
                 let barre_statut = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(1) > div")
+                var distance_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(5) > div > span")
 
                 //FIRST DISPLAY
                 barre_statut.textContent = "Les portes sont fermées."
                 data_bar.setAttribute("placeholder", "LEVIER DE TRACTION : " + stades_vitesse[stade_actuel] + " / VITESSE : " + Math.round(vitesse_actuelle))
                 distance_display.textContent = "Distance to next station : " + 100 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
                 data_bar.setAttribute('size', data_bar.getAttribute('placeholder').length);
-
-                var name_display = document.querySelector("body > div.dg.ac > div > ul > li:nth-child(5) > div > span")
-
                 name_display.textContent = "Next station : " + stations[next_station_index]
 
                 var game_loop = setInterval(function (train_marker) {
@@ -211,11 +213,11 @@
                     train_marker.motionSpeed(vitesse_actuelle)
 
                     if (vitesse_actuelle > 0.01) {
-                        distance_to_next_station = Math.abs(Math.round(1000000 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)))) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
+                        distance_to_next_station = Math.abs(Math.round(100000 * ((stations_waypoints[next_station_index][0] - train_marker.__marker._latlng.lat) + (stations_waypoints[next_station_index][1] - train_marker.__marker._latlng.lng)))) //get_distance(stations_waypoints[next_station_index], train_marker.__marker._latlng))
                         if (distance_to_next_station != undefined) {
                             distance_display.textContent = "Distance to next station : " + distance_to_next_station
 
-                            if(distance_to_next_station < 200) {
+                            if(distance_to_next_station < 250) {
                                 //Màj de la prochaine station
                                 next_station_index++
                                 name_display.textContent = stations[next_station_index]
@@ -306,7 +308,7 @@
                         });
 
                         // set content
-                        modal.setContent('<h1>here\'s some content</h1>');
+                        modal.setContent('<p>'+line_list.map(e=> e + "<br>" )+'</p>');
 
                         // add a button
                         modal.addFooterBtn('Button label', 'tingle-btn tingle-btn--primary', function () {
@@ -322,9 +324,6 @@
 
                         // open modal
                         modal.open();
-
-                        // close modal
-                        modal.close();
 
                         setTimeout(() => {
                             blocage = false
@@ -379,7 +378,6 @@
     }
 
     function get_starting_way(json) {
-        console.log("Acquiring first way ...")
         var trouve = false
         var i = 0
         var node
@@ -394,27 +392,28 @@
         if (trouve) {
             //search for starting and end nodes
             var [next_way, is_first_point] = get_way_with_node(node.id, json)
+            console.log("first station on ")
+            console.log(next_way)
             var is_first_point
             var starting_way
 
             while (next_way != null) {
                 temp_way_ids.push(next_way.id)
                 var temp = get_next_way_of_way(next_way, temp_way_ids, json)
-                //console.log(temp[0])
 
                 if (temp[0] != null) {
                     next_way = temp[0]
                     is_first_point = temp[1]
                 } else {
                     starting_way = next_way
+                    console.log("final start way is")
+                    console.log(starting_way)
                     next_way = null
                 }
             }
 
-            console.log(starting_way)
             return [starting_way, is_first_point]
         }
-
 
         alert("ERROR: There's no starting node on this line or stations are wrongly tagged.")
     }
