@@ -46,7 +46,7 @@
         // resolved in current versions (syntax errors on shields, etc.)
         var scenes = {
             // Default style
-            'Simple': 'demos/scene.yaml',
+            'Simple': 'open-tsim/scene.yaml',
 
             // Nextzen (nee Mapzen) basemaps
             'Bubble Wrap': {
@@ -91,14 +91,14 @@
                 ]
             },
 
-            // Crosshatch style (texture/shader demos)
-            'Crosshatch': 'demos/styles/crosshatch.zip',
+            // Crosshatch style (texture/shader open-tsim)
+            'Crosshatch': 'open-tsim/styles/crosshatch.zip',
 
             // Fragment shader example
             'Rainbow Buildings': {
                 import: [
-                    'demos/scene.yaml',
-                    'demos/styles/rainbow.yaml'
+                    'open-tsim/scene.yaml',
+                    'open-tsim/styles/rainbow.yaml'
                 ],
                 layers: {
                     buildings: {
@@ -119,8 +119,8 @@
             // Vertex shader example
             'Pop-up Buildings': {
                 import: [
-                    'demos/scene.yaml',
-                    'demos/styles/popup.yaml'
+                    'open-tsim/scene.yaml',
+                    'open-tsim/styles/popup.yaml'
                 ],
                 layers: {
                     buildings: {
@@ -172,7 +172,7 @@
             scene.config.global.language = gui.language;
             scene.config.global.ux_language = gui.language;
             gui.add(gui, 'language', langs).onChange(function(value) {
-                scene.config.global.language = value;    // for bundled demos
+                scene.config.global.language = value;    // for bundled open-tsim
                 scene.config.global.ux_language = value; // for Nextzen basemaps
                 scene.updateConfig();
             });

@@ -2,7 +2,7 @@
 
 
 (function () {
-    var scene_url = 'demos/scene.yaml';
+    var scene_url = 'open-tsim/scene.yaml';
 
     // optionally override scene URL
     if ('URLSearchParams' in window) {
@@ -151,14 +151,14 @@
                             if (next_way && next_way.tags && next_way.tags.name) {
                                 barre_statut.textContent = next_way.tags.name
                             } else {
-                                barre_statut.textContent = "Ligne chargée en mémoire."
+                                barre_statut.textContent = "Line successfully loaded."
                             }
                         }
 
                         setTimeout(() => {
                             blocage = false
                             console.log("Train ajouté à la ligne.")
-                            barre_statut.textContent = "Pressez Bas pour commencer à conduire."
+                            barre_statut.textContent = "Press Down to start driving."
                         }, 700);
                     })
             }
@@ -171,11 +171,11 @@
                     color: "transparent"
                 }, {
                     auto: true,
-                    speed: 10
+                    speed: 1
                 }, {
                     title: "2555641",
                     icon: L.divIcon({
-                        html: "<img src='train.svg' style='width: 35px; height: 35px;'></img>",
+                        html: "<img src='train.svg' style='width: 40px; height: 40px;'></img>",
                         iconSize: L.point(27.5, 24)
                     })
                 }).addTo(map);
@@ -193,7 +193,7 @@
                 data_bar.setAttribute('size', data_bar.getAttribute('placeholder').length);
                 name_display.textContent = "Next station : " + stations[next_station_index]
 
-                var game_loop = setInterval(function (train_marker) {
+                setInterval(function (train_marker) {
                     /* BOUCLE DE MAJ DES VARIABLES DE CONDUITE */
                     if (stades_vitesse[stade_actuel] > 0) { //ACCELERATION
                         if (vitesse_actuelle >= max_speed) {

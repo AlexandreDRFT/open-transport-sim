@@ -13,7 +13,7 @@
             feature_count: { caption: '# features' },
             buffer_size: { caption: 'GL buffers (MB)' }
         },
-        CSSPath : 'demos/lib/',
+        CSSPath : 'open-tsim/lib/',
         plugins: [glS]
     });
 
