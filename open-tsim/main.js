@@ -127,7 +127,14 @@
                                     var node_name = get_name_of_node(node, obj)
                                     if (node_name != null && !stations.includes(node_name)) {
                                         stations.push(node_name)
-                                        stations_waypoints.push(get_coords_of_node(node, obj))
+                                        var station_coords = get_coords_of_node(node, obj)
+                                        stations_waypoints.push(station_coords)
+                                        L.marker(station_coords, {
+                                            icon: L.divIcon({
+                                                html: "<img src='station.svg' style='width: 40px; height: 40px;transform: translate(-40px, -40px);'></img>",
+                                                iconSize: L.point(27.5, 24)
+                                            })
+                                        }).addTo(map);
                                     }
                                 })
 
